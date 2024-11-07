@@ -16,7 +16,7 @@ class SMBusFakeDevice(MockSMBus):
         self.regs[register] = value
 
     def read_word_data(self, i2c_addr, register):
-        return struct.unpack("H", self.regs[register:register + 1])
+        return self.regs[register]
 
     def write_word_data(self, i2c_addr, register, value):
-        self.regs[register: register + 1] = value
+        self.regs[register] = value
