@@ -22,14 +22,14 @@ def test_read_buttons(smbus, qwstpad):
 
 def test_config_port(smbus, qwstpad):
     dev = smbus.SMBus(1)
-    pad = qwstpad.QwSTPad(dev)
+    qwstpad.QwSTPad(dev)
 
     assert dev.regs[0x06] == 0b1111100100111111
 
 
 def test_polarity_port(smbus, qwstpad):
     dev = smbus.SMBus(1)
-    pad = qwstpad.QwSTPad(dev)
+    qwstpad.QwSTPad(dev)
 
     assert dev.regs[0x04] == 0b1111100000111111
 

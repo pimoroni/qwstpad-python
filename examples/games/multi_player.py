@@ -1,7 +1,9 @@
-from qwstpad import ADDRESSES, QwSTPad
-import pygame
-from collections import namedtuple
 import math
+from collections import namedtuple
+
+import pygame
+
+from qwstpad import ADDRESSES, QwSTPad
 
 WIDTH, HEIGHT = 500, 500
 

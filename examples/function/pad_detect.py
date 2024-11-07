@@ -1,4 +1,5 @@
 import time
+
 from qwstpad import ADDRESSES, QwSTPad
 
 """

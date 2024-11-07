@@ -1,9 +1,11 @@
-from qwstpad import QwSTPad
-import time
-import random
-import pygame
-from collections import namedtuple
 import gc
+import random
+import time
+from collections import namedtuple
+
+import pygame
+
+from qwstpad import QwSTPad
 
 WIDTH, HEIGHT = 500, 500
 

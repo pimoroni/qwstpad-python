@@ -1,5 +1,4 @@
 from i2cdevice import MockSMBus
-import struct
 
 I2C_SMBUS = 0x0720
 I2C_SMBUS_BYTE_DATA = 2
