@@ -111,4 +111,4 @@ ignore = [
 [tool.pimoroni]
 apt_packages = ["git"]
 configtxt = []
-commands = ["false"]
+commands = []
