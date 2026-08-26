@@ -4,7 +4,7 @@ def test_address_code(smbus, qwstpad):
 
     address = pad.address_code()
 
-    assert True if address == 2 else False
+    assert address == 2
 
 
 def test_read_buttons(smbus, qwstpad):

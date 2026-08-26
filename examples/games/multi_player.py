@@ -1,3 +1,4 @@
+import contextlib
 import math
 from collections import namedtuple
 
@@ -161,7 +162,7 @@ for i in range(len(ADDRESSES)):
         pad = QwSTPad(address=ADDRESSES[i])
         players.append(Player(i, p.x, p.y, PLAYER_RADIUS, p.colour, pad))
         print(f"P{i + 1}: Connected")
-    except OSError:
+    except OSError:  # noqa: PERF203
         print(f"P{i + 1}: Not Connected")
 
 if len(players) == 0:
@@ -187,7 +188,7 @@ try:
                 # Handle QwSTPads being disconnected unexpectedly
                 except OSError:
                     print(f"P{p.index + 1}: Disconnected ... Exiting")
-                    raise SystemExit
+                    raise SystemExit from None
 
                 # Check if any projectiles have hit players
                 for p in players:
@@ -224,7 +225,5 @@ try:
 
 finally:
     for p in players:
-        try:
+        with contextlib.suppress(OSError):
             p.pad.clear_leds()
-        except OSError:
-            pass

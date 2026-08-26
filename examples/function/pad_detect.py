@@ -1,3 +1,4 @@
+import contextlib
 import time
 
 from qwstpad import ADDRESSES, QwSTPad
@@ -35,12 +36,9 @@ try:
 
             # The pad is not registered
             else:
-                try:
-                    # Attempt to connect to and register it
+                # Attempt to connect to and register it
+                with contextlib.suppress(OSError):
                     pads[addr] = QwSTPad(address=addr)
-                except OSError:
-                    # If that fails, carry on
-                    pass
 
             # Print out the connected state of the current pad
             print(f"{hex(addr)}" if addr in pads else "----", end=" ")
@@ -54,7 +52,5 @@ try:
 # Turn off the LEDs of any connected QwSTPads
 finally:
     for addr in pads:
-        try:
+        with contextlib.suppress(OSError):
             pads[addr].clear_leds()
-        except OSError:
-            pass

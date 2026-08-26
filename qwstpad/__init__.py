@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from typing import ClassVar
 
 __version__ = '0.0.1'
 
@@ -25,7 +26,7 @@ class QwSTPad:
     CONFIGURATION_PORT1 = 0x07
 
     # Mappings
-    BUTTON_MAPPING = OrderedDict({'A': 0xE, 'B': 0xC, 'X': 0xF, 'Y': 0xD,
+    BUTTON_MAPPING: ClassVar = OrderedDict({'A': 0xE, 'B': 0xC, 'X': 0xF, 'Y': 0xD,
                                   'U': 0x1, 'D': 0x4, 'L': 0x2, 'R': 0x3,
                                   '+': 0xB, '-': 0x5})
 
@@ -49,7 +50,7 @@ class QwSTPad:
         self.__i2c.write_word_data(self.__address, self.OUTPUT_PORT0, 0b00000110_11000000)
 
         self.__button_states = OrderedDict({})
-        for key, _ in self.BUTTON_MAPPING.items():
+        for key in self.BUTTON_MAPPING:
             self.__button_states[key] = False
 
         self.__led_states = 0b0000

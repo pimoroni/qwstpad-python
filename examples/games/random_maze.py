@@ -1,3 +1,4 @@
+import contextlib
 import gc
 import random
 import time
@@ -109,20 +110,20 @@ class MazeBuilder:
         self.maze = []
 
         row = [1]
-        for x in range(0, self.width):
+        for _ in range(self.width):
             row.append(1)
             row.append(1)
         self.maze.append(row)
 
-        for y in range(0, self.height):
+        for y in range(self.height):
             row = [1]
-            for x in range(0, self.width):
+            for x in range(self.width):
                 row.append(0)
                 row.append(1 if self.cell_grid[x][y].right else 0)
             self.maze.append(row)
 
             row = [1]
-            for x in range(0, self.width):
+            for x in range(self.width):
                 row.append(1 if self.cell_grid[x][y].bottom else 0)
                 row.append(1)
             self.maze.append(row)
@@ -177,7 +178,7 @@ class MazeBuilder:
                     pygame.draw.rect(screen, PATH, pygame.Rect(x, y, wall_size, wall_size))
 
 
-class Player(object):
+class Player:
     def __init__(self, x, y, colour, pad):
         self.x = x
         self.y = y
@@ -257,7 +258,7 @@ try:
     player = Player(*start, PLAYER, QwSTPad())
 except OSError:
     print("QwSTPad: Not Connected ... Exiting")
-    raise SystemExit
+    raise SystemExit from None
 
 print("QwSTPad: Connected ... Starting")
 
@@ -337,9 +338,7 @@ except OSError:
 
 # Turn off the LEDs of the connected QwSTPad
 finally:
-    try:
+    with contextlib.suppress(OSError):
         player.pad.clear_leds()
-    except OSError:
-        pass
 
     pygame.quit()

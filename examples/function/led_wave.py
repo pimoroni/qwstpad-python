@@ -20,7 +20,7 @@ try:
     qwstpad = QwSTPad(address=I2C_ADDRESS)
 except OSError:
     print("QwSTPad: Not Connected ... Exiting")
-    raise SystemExit
+    raise SystemExit from None
 
 print("QwSTPad: Connected ... Starting")
 
