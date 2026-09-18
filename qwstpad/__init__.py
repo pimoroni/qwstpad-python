@@ -1,7 +1,11 @@
 from collections import OrderedDict
+from importlib.metadata import PackageNotFoundError, version
 from typing import ClassVar
 
-__version__ = '0.0.1'
+try:
+    __version__ = version("qwstpad")
+except PackageNotFoundError:
+    __version__ = "0.0.0"
 
 # Constants
 NUM_LEDS = 4
